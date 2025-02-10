@@ -7,7 +7,6 @@ import Altaneo.ed_tech.entity.ranking.CourseAndFee;
 import Altaneo.ed_tech.entity.ranking.Ranking;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

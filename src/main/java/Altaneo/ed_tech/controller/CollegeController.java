@@ -20,12 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("api/v1/college")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class CollegeController {
 
     @Autowired
     private CollegeService collegeService;
 
+    
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<College>> addCollege(@RequestBody College college) {
         return collegeService.addCollege(college);
@@ -43,6 +44,14 @@ public class CollegeController {
 
     @PostMapping("/update/{id}")
     public ResponseEntity<ApiResponse<College>> updateCollege(@PathVariable Long id, @RequestBody College college) {
-        return collegeService.updateCollege(id,college);
+        return collegeService.updateCollege(id, college);
     }
+
+    // @PostMapping("/search")
+    // public ResponseEntity<College> searchCollege(@RequestBody String collegeName) {
+    //     String name ="Indian Institute of Technology Kanpu";
+    //     return collegeService.getCollegeByName(name)
+    //             .map(ResponseEntity::ok)
+    //             .orElse(ResponseEntity.notFound().build());
+    // }
 }

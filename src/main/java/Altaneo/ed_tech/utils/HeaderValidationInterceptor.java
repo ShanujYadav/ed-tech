@@ -46,7 +46,7 @@ public class HeaderValidationInterceptor implements HandlerInterceptor {
             if (token.startsWith("Bearer ")) {
                 token = token.substring(7); // Remove 'Bearer ' prefix
             }
-            return true;
+            return true; 
             // Claims claims = Jwts.parser()
             // .setSigningKey(SECRET_KEY)
             // .parseClaimsJws(token)

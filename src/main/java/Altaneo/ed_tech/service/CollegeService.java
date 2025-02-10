@@ -21,9 +21,17 @@ public class CollegeService {
     @Autowired
     private CollegeRepo collegeRepo;
 
-    public ResponseEntity<ApiResponse<College>> addCollege(College college) {
-        // System.out.println("College-------------" + college);
+    // public String<College> getCollegeByName(String name) {
+    // System.out.println("name ----------"+name);
+    // if(collegeRepo.findByName(name).isPresent()){
+    // return
+    // }
+    // else{
+    // }
+    // }
 
+    public ResponseEntity<ApiResponse<College>> addCollege(College college) {
+        System.out.println("College-------------" + college);
         try {
             if (college.getContactInfo() == null) {
                 throw new IllegalArgumentException("contactInfo Section is missing!.");
@@ -51,6 +59,9 @@ public class CollegeService {
             }
 
             checkMandatory(college.getName(), "name");
+            if (collegeRepo.findByName(college.getName()).isPresent()) {
+                return ApiResponse.send(409, "College Already exists");
+            }
             checkMandatory(college.getSortName(), "sort Name");
             checkMandatory(college.getCategory(), "Category");
             checkMandatory(college.getType(), "Type");
@@ -117,9 +128,8 @@ public class CollegeService {
                 checkMandatory(fest.getFestName(), "Fest Name");
                 checkMandatory(fest.getDescription(), "Fest Description");
             }
-
             College savedCollege = collegeRepo.save(college);
-            return ApiResponse.send(200, "College Saved !", savedCollege);
+            return ApiResponse.send(200, "College Added Successfully !", savedCollege);
         } catch (IllegalArgumentException e) {
             return ApiResponse.send(400, e.getMessage());
         } catch (Exception e) {
